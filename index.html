@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ALIBI Skin">
+<title>ALIBI — Skin Protocol</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+  :root {
+    /* Base palette — ivory, nude, blush */
+    --ivory:      #FAF7F2;
+    --parchment:  #F2EDE4;
+    --sand:       #E8DFD0;
+    --nude:       #D4C4B0;
+    --warm-white: #FDFBF8;
+
+    /* Accent palette */
+    --gold:       #C4965A;
+    --gold-light: #E8C98A;
+    --blush:      #E8B4B8;
+    --blush-deep: #C4787E;
+    --rose:       #F0D4D6;
+    --butter:     #F5E6A0;
+    --butter-deep:#C8A830;
+
+    /* Text */
+    --text:       #3A3028;
+    --text-mid:   #7A6858;
+    --text-light: #A89880;
+
+    /* Category colour coding */
+    --col-wash:       #A8C4A0;  /* sage green */
+    --col-wash-bg:    rgba(168,196,160,0.12);
+    --col-tone:       #C4A0C8;  /* soft lavender */
+    --col-tone-bg:    rgba(196,160,200,0.12);
+    --col-serum:      #E87878;  /* coral pink */
+    --col-serum-bg:   rgba(232,120,120,0.12);
+    --col-cream:      #C4965A;  /* warm gold */
+    --col-cream-bg:   rgba(196,150,90,0.12);
+    --col-spf:        #78A8C8;  /* sky blue */
+    --col-spf-bg:     rgba(120,168,200,0.12);
+    --col-led:        #A888C8;  /* soft purple */
+    --col-led-bg:     rgba(168,136,200,0.12);
+    --col-mask:       #78C4A8;  /* mint */
+    --col-mask-bg:    rgba(120,196,168,0.12);
+    --col-eye:        #E8A8B4;  /* pale pink */
+    --col-eye-bg:     rgba(232,168,180,0.12);
+    --col-makeup:     #C8B8A8;  /* warm taupe */
+    --col-makeup-bg:  rgba(200,184,168,0.12);
+
+    --border: rgba(196,150,90,0.18);
+    --card-shadow: 0 2px 12px rgba(58,48,40,0.06);
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--ivory);
+    color: var(--text);
+    min-height: 100vh;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: #F5F0EB;
+    padding: 52px 20px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--sand);
+    box-shadow: 0 2px 20px rgba(196,150,90,0.08);
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap');
+
+  .alibi-logo {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #1C1410;
+    text-transform: lowercase;
+    margin-bottom: 0px;
+    line-height: 1;
+  }
+  .alibi-collection {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 8px;
+    color: #1C1410;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    margin-top: 4px;
+  }
+  .alibi-rule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+  .alibi-line { flex: 1; height: 1px; background: var(--sand); }
+  .alibi-diamond { color: var(--blush-deep); font-size: 7px; }
+  .alibi-sub {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 3px;
+  }
+  .alibi-case {
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--blush-deep);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  /* LEGEND */
+  .legend {
+    background: var(--parchment);
+    border-top: 1px solid var(--sand);
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    font-weight: 700;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* TABS */
+  .tabs { display: flex; gap: 4px; padding: 12px 16px; background: var(--warm-white); }
+  .tab {
+    flex: 1; padding: 9px 4px;
+    border-radius: 20px;
+    border: 1px solid var(--sand);
+    background: transparent;
+    color: var(--text-light);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .tab.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: white;
+  }
+
+  /* PANELS */
+  .panel { display: none; padding: 16px 16px 60px; }
+  .panel.active { display: block; }
+
+  /* DAY STRIP */
+  .day-strip {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+  }
+  .day-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
+  .day-value { font-size: 18px; font-weight: 700; color: var(--gold); }
+  .step-count { font-size: 14px; color: var(--blush-deep); font-weight: 700; }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 13px 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+  }
+  .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .progress-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-light); font-weight: 700; }
+  .progress-pct { font-size: 26px; font-weight: 700; color: var(--gold); }
+  .bar { height: 5px; background: var(--sand); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--blush), var(--gold)); transition: width 0.4s ease; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--text-light);
+    font-weight: 700; margin: 18px 0 8px 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--sand); }
+
+  /* STEP CARDS */
+  .step-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 16px 14px 16px 18px;
+    margin-bottom: 9px;
+    display: flex; align-items: flex-start; gap: 12px;
+    cursor: pointer; transition: all 0.2s;
+    position: relative; overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+  .step-card::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 4px;
+    border-radius: 12px 0 0 12px;
+  }
+  .step-card.done {
+    background: var(--parchment);
+    opacity: 0.65;
+  }
+
+  /* Category left-border colours */
+  .cat-wash::before   { background: var(--col-wash); }
+  .cat-tone::before   { background: var(--col-tone); }
+  .cat-serum::before  { background: var(--col-serum); }
+  .cat-cream::before  { background: var(--col-cream); }
+  .cat-spf::before    { background: var(--col-spf); }
+  .cat-led::before    { background: var(--col-led); }
+  .cat-mask::before   { background: var(--col-mask); }
+  .cat-eye::before    { background: var(--col-eye); }
+  .cat-makeup::before { background: var(--col-makeup); }
+
+  /* Step number badges */
+  .step-num {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px;
+    flex-shrink: 0; margin-top: 1px; transition: all 0.2s;
+  }
+  .step-card.done .step-num { background: var(--gold) !important; color: white !important; }
+
+  .cat-wash   .step-num { background: var(--col-wash-bg);   color: var(--col-wash); }
+  .cat-tone   .step-num { background: var(--col-tone-bg);   color: var(--col-tone); }
+  .cat-serum  .step-num { background: var(--col-serum-bg);  color: var(--col-serum); }
+  .cat-cream  .step-num { background: var(--col-cream-bg);  color: var(--col-cream); }
+  .cat-spf    .step-num { background: var(--col-spf-bg);    color: var(--col-spf); }
+  .cat-led    .step-num { background: var(--col-led-bg);    color: var(--col-led); }
+  .cat-mask   .step-num { background: var(--col-mask-bg);   color: var(--col-mask); }
+  .cat-eye    .step-num { background: var(--col-eye-bg);    color: var(--col-eye); }
+  .cat-makeup .step-num { background: var(--col-makeup-bg); color: var(--col-makeup); }
+
+  .step-body { flex: 1; }
+  .step-cat-label {
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 3px;
+  }
+  .cat-wash   .step-cat-label { color: var(--col-wash); }
+  .cat-tone   .step-cat-label { color: var(--col-tone); }
+  .cat-serum  .step-cat-label { color: var(--col-serum); }
+  .cat-cream  .step-cat-label { color: var(--col-cream); }
+  .cat-spf    .step-cat-label { color: var(--col-spf); }
+  .cat-led    .step-cat-label { color: var(--col-led); }
+  .cat-mask   .step-cat-label { color: var(--col-mask); }
+  .cat-eye    .step-cat-label { color: var(--col-eye); }
+  .cat-makeup .step-cat-label { color: var(--col-makeup); }
+
+  .step-product { font-weight: 700; font-size: 17px; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
+  .step-action { font-size: 16px; color: var(--text-mid); line-height: 1.65; }
+
+  .check {
+    width: 22px; height: 22px; border-radius: 50%;
+    border: 1.5px solid var(--nude);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 3px;
+    font-size: 11px; color: transparent; font-weight: 700;
+    transition: all 0.2s;
+  }
+  .step-card.done .check { background: var(--gold); border-color: var(--gold); color: white; }
+
+  /* NOTIFICATION CARD */
+  .notif-card {
+    background: var(--rose);
+    border: 1px solid var(--blush);
+    border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+  .notif-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--blush-deep); font-weight: 700; margin-bottom: 4px; }
+  .notif-text { font-size: 16px; color: var(--text-mid); line-height: 1.65; margin-bottom: 10px; }
+  .notif-btn {
+    width: 100%; padding: 11px;
+    background: var(--blush-deep); border: none; border-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: white; cursor: pointer;
+  }
+  .notif-btn:disabled { background: var(--nude); cursor: not-allowed; }
+  .notif-status { font-size: 13px; color: var(--blush-deep); text-align: center; margin-top: 8px; font-weight: 700; display: none; }
+
+  /* LED CARD */
+  .led-card {
+    background: linear-gradient(135deg, #F0E8F8, #E8F0F8);
+    border: 1px solid rgba(168,136,200,0.3);
+    border-radius: 12px; padding: 15px 16px; margin-bottom: 8px;
+    box-shadow: var(--card-shadow);
+  }
+  .led-eye { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--col-led); font-weight: 700; margin-bottom: 4px; }
+  .led-title { font-size: 19px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .led-sub { font-size: 16px; color: var(--text-mid); margin-bottom: 12px; line-height: 1.6; }
+  .led-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+  .led-chip {
+    background: rgba(168,136,200,0.12); border: 1px solid rgba(168,136,200,0.25);
+    border-radius: 20px; padding: 4px 10px;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--col-led); font-weight: 700;
+  }
+
+  /* WEEKLY CARDS */
+  .weekly-card {
+    background: var(--warm-white); border: 1px solid var(--sand);
+    border-radius: 12px; padding: 13px 13px 13px 16px;
+    margin-bottom: 7px; position: relative; overflow: hidden;
+    box-shadow: var(--card-shadow);
+  }
+  .weekly-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 12px 0 0 12px; }
+  .weekly-day { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+  .weekly-title { font-weight: 700; font-size: 17px; color: var(--text); margin-bottom: 5px; }
+  .weekly-desc { font-size: 16px; color: var(--text-mid); line-height: 1.65; }
+
+  /* RULES */
+  .rules-card {
+    background: #FFF0F0; border: 1px solid rgba(196,120,126,0.3);
+    border-radius: 12px; padding: 14px 16px; margin-top: 14px;
+  }
+  .rules-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--blush-deep); font-weight: 700; margin-bottom: 10px; }
+  .rule-item { font-size: 16px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px; padding-left: 14px; border-left: 2px solid var(--blush-deep); }
+
+  /* AUDIT */
+  .audit-card { background: var(--warm-white); border: 1px solid var(--sand); border-radius: 12px; padding: 12px 14px; margin-bottom: 7px; box-shadow: var(--card-shadow); }
+  .audit-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; gap: 8px; }
+  .audit-product { font-weight: 700; font-size: 15px; color: var(--text); flex: 1; line-height: 1.3; }
+  .audit-badge { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; flex-shrink: 0; }
+  .audit-note { font-size: 15px; color: var(--text-mid); line-height: 1.65; }
+
+  /* GAPS */
+  .gaps-card { background: var(--rose); border: 1px solid var(--blush); border-radius: 12px; padding: 14px 16px; margin-top: 8px; }
+  .gaps-label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--blush-deep); font-weight: 700; margin-bottom: 10px; }
+  .gap-item { margin-bottom: 12px; padding-left: 12px; border-left: 2px solid var(--blush-deep); }
+  .gap-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+  .gap-desc { font-size: 15px; color: var(--text-mid); line-height: 1.65; }
+
+  /* RESET */
+  .reset-btn {
+    width: 100%; padding: 12px; margin-top: 12px;
+    background: transparent; border: 1px solid var(--sand);
+    border-radius: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text-light); cursor: pointer; transition: all 0.2s;
+  }
+
+  /* FOOTER */
+  .case-stamp {
+    text-align: center; padding: 14px;
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--nude);
+    font-weight: 700;
+  }
+
+  /* TRACKER */
+  .tracker-header {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+  }
+  .tracker-month {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .tracker-month-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .tracker-nav {
+    display: flex;
+    gap: 8px;
+  }
+  .tracker-nav-btn {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--sand);
+    background: transparent;
+    font-size: 16px;
+    color: var(--gold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .tracker-year {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .stat-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 12px 10px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+  }
+  .stat-number {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  /* CALENDAR GRID */
+  .cal-grid {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+  }
+  .cal-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 8px;
+  }
+  .cal-day-name {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding: 4px 0;
+  }
+  .cal-cells {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    background: var(--ivory);
+  }
+  .cal-cell.empty { background: transparent; cursor: default; border: none; }
+  .cal-cell.today { border-color: var(--gold); }
+  .cal-cell.future { opacity: 0.35; cursor: default; }
+
+  /* Status backgrounds */
+  .cal-cell.both   { background: rgba(168,196,160,0.3); }
+  .cal-cell.am-only { background: rgba(232,180,100,0.25); }
+  .cal-cell.pm-only { background: rgba(168,136,200,0.25); }
+  .cal-cell.missed { background: rgba(232,120,120,0.15); }
+
+  .cal-date {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .cal-cell.today .cal-date { color: var(--gold); }
+  .cal-cell.future .cal-date { color: var(--text-light); }
+
+  .cal-dots {
+    display: flex;
+    gap: 2px;
+    margin-top: 3px;
+  }
+  .cal-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+  }
+  .dot-am  { background: var(--gold); }
+  .dot-pm  { background: var(--col-led); }
+
+  /* LEGEND */
+  .cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+  }
+  .cal-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-mid);
+    font-weight: 500;
+  }
+  .cal-legend-swatch {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* LOG BUTTON */
+  .log-today {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+  }
+  .log-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .log-btns {
+    display: flex;
+    gap: 8px;
+  }
+  .log-btn {
+    flex: 1;
+    padding: 12px 8px;
+    border-radius: 10px;
+    border: 1.5px solid var(--sand);
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-mid);
+  }
+  .log-btn.logged-am {
+    background: rgba(232,180,100,0.2);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .log-btn.logged-pm {
+    background: rgba(168,136,200,0.2);
+    border-color: var(--col-led);
+    color: var(--col-led);
+  }
+
+  /* STREAK CARD */
+  .streak-card {
+    background: linear-gradient(135deg, var(--rose), #FFF8F0);
+    border: 1px solid var(--blush);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .streak-flame { font-size: 36px; }
+  .streak-info {}
+  .streak-number { font-size: 28px; font-weight: 700; color: var(--blush-deep); line-height: 1; }
+  .streak-label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-light); font-weight: 700; margin-top: 2px; }
+  .streak-sub { font-size: 13px; color: var(--text-mid); margin-top: 3px; }
+
+
+  /* WEEKLY LOG */
+  .weekly-log-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: var(--card-shadow);
+  }
+  .weekly-log-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .weekly-log-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .weekly-log-btn {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--sand);
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text-mid);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .weekly-log-btn .wl-left { display: flex; align-items: center; gap: 10px; }
+  .weekly-log-btn .wl-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .weekly-log-btn .wl-check { font-size: 16px; opacity: 0; transition: opacity 0.2s; }
+  .weekly-log-btn.logged .wl-check { opacity: 1; }
+
+  .weekly-log-btn.logged-led    { background: rgba(168,136,200,0.15); border-color: var(--col-led); color: var(--col-led); }
+  .weekly-log-btn.logged-needle { background: rgba(232,120,120,0.12); border-color: var(--col-serum); color: var(--col-serum); }
+  .weekly-log-btn.logged-patch  { background: rgba(196,150,90,0.12); border-color: var(--gold); color: var(--gold); }
+  .weekly-log-btn.logged-hydro  { background: rgba(120,196,168,0.15); border-color: var(--col-mask); color: var(--col-mask); }
+  .weekly-log-btn.logged-bio    { background: rgba(120,168,200,0.12); border-color: var(--col-spf); color: var(--col-spf); }
+
+  /* MONTHLY TARGETS */
+  .targets-card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+  }
+  .targets-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .target-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .target-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .target-info { flex: 1; }
+  .target-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+  .target-bar-wrap { height: 5px; background: var(--sand); border-radius: 3px; overflow: hidden; }
+  .target-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+  .target-nums { font-size: 12px; color: var(--text-light); font-weight: 700; white-space: nowrap; }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="alibi-logo">alibi</div>
+  <div class="alibi-collection">Skin Protocol</div>
+  <div class="alibi-rule"><div class="alibi-line"></div><div class="alibi-diamond">◆</div><div class="alibi-line"></div></div>
+  <div class="alibi-case">Meena · Olive Skin · Pigmentation · Dryness · 50</div>
+
+  <!-- COLOUR KEY LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-wash)"></div>Cleanse</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-tone)"></div>Tone</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-serum)"></div>Serum</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-cream)"></div>Moisturiser</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-spf)"></div>SPF</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-led)"></div>LED</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-mask)"></div>Mask</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-eye)"></div>Eye</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--col-makeup)"></div>Makeup</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('morning',this)">☀ Morning</button>
+    <button class="tab" onclick="switchTab('evening',this)">◑ Evening</button>
+    <button class="tab" onclick="switchTab('weekly',this)">▦ Weekly</button>
+    <button class="tab" onclick="switchTab('tracker',this)">▣ Tracker</button>
+    <button class="tab" onclick="switchTab('audit',this)">≡ Products</button>
+  </div>
+</div>
+
+
+<!-- TRACKER -->
+<div id="tracker" class="panel">
+
+  <div class="streak-card" id="streak-card">
+    <div class="streak-flame">🔥</div>
+    <div class="streak-info">
+      <div class="streak-number" id="streak-num">0</div>
+      <div class="streak-label">Day Streak</div>
+      <div class="streak-sub" id="streak-sub">Complete both routines to build your streak</div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-number" id="stat-complete">0</div>
+      <div class="stat-label">Full Days</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="stat-partial">0</div>
+      <div class="stat-label">Partial Days</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number" id="stat-missed">0</div>
+      <div class="stat-label">Missed Days</div>
+    </div>
+  </div>
+
+  <!-- DAILY LOG -->
+  <div class="log-today">
+    <div class="log-title">Log Today's Daily Routines</div>
+    <div class="log-btns">
+      <button class="log-btn" id="log-am-btn" onclick="logRoutine('am')">☀ Morning Done</button>
+      <button class="log-btn" id="log-pm-btn" onclick="logRoutine('pm')">◑ Evening Done</button>
+    </div>
+  </div>
+
+  <!-- WEEKLY TREATMENTS LOG -->
+  <div class="weekly-log-card">
+    <div class="weekly-log-title">Log Today's Treatments</div>
+    <div class="weekly-log-grid">
+
+      <button class="weekly-log-btn" id="log-led-btn" onclick="logWeekly('led')">
+        <div class="wl-left">
+          <div class="wl-dot" style="background:var(--col-led)"></div>
+          💜 CurrentBody LED Mask
+        </div>
+        <span class="wl-check">✓</span>
+      </button>
+
+      <button class="weekly-log-btn" id="log-needle-btn" onclick="logWeekly('needle')">
+        <div class="wl-left">
+          <div class="wl-dot" style="background:var(--col-serum)"></div>
+          🔴 Xioimy Dissolving Microneedle
+        </div>
+        <span class="wl-check">✓</span>
+      </button>
+
+      <button class="weekly-log-btn" id="log-patch-btn" onclick="logWeekly('patch')">
+        <div class="wl-left">
+          <div class="wl-dot" style="background:var(--gold)"></div>
+          🟡 Eelhoe Dark Spot Patches
+        </div>
+        <span class="wl-check">✓</span>
+      </button>
+
+      <button class="weekly-log-btn" id="log-hydro-btn" onclick="logWeekly('hydro')">
+        <div class="wl-left">
+          <div class="wl-dot" style="background:var(--col-mask)"></div>
+          🟩 CurrentBody Hydrogel Mask
+        </div>
+        <span class="wl-check">✓</span>
+      </button>
+
+      <button class="weekly-log-btn" id="log-bio-btn" onclick="logWeekly('bio')">
+        <div class="wl-left">
+          <div class="wl-dot" style="background:var(--col-spf)"></div>
+          🔵 Xioimy Bio-Collagen Film
+        </div>
+        <span class="wl-check">✓</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- MONTHLY TARGETS -->
+  <div class="targets-card">
+    <div class="targets-title">This Month vs Target</div>
+
+    <div class="target-row">
+      <div class="target-dot" style="background:var(--col-led)"></div>
+      <div class="target-info">
+        <div class="target-name">LED Mask</div>
+        <div class="target-bar-wrap"><div class="target-bar-fill" id="tbar-led" style="background:var(--col-led);width:0%"></div></div>
+      </div>
+      <div class="target-nums" id="tnum-led">0/12</div>
+    </div>
+
+    <div class="target-row">
+      <div class="target-dot" style="background:var(--col-serum)"></div>
+      <div class="target-info">
+        <div class="target-name">Microneedle</div>
+        <div class="target-bar-wrap"><div class="target-bar-fill" id="tbar-needle" style="background:var(--col-serum);width:0%"></div></div>
+      </div>
+      <div class="target-nums" id="tnum-needle">0/8</div>
+    </div>
+
+    <div class="target-row">
+      <div class="target-dot" style="background:var(--gold)"></div>
+      <div class="target-info">
+        <div class="target-name">Dark Spot Patches</div>
+        <div class="target-bar-wrap"><div class="target-bar-fill" id="tbar-patch" style="background:var(--gold);width:0%"></div></div>
+      </div>
+      <div class="target-nums" id="tnum-patch">0/4</div>
+    </div>
+
+    <div class="target-row">
+      <div class="target-dot" style="background:var(--col-mask)"></div>
+      <div class="target-info">
+        <div class="target-name">Hydrogel Mask</div>
+        <div class="target-bar-wrap"><div class="target-bar-fill" id="tbar-hydro" style="background:var(--col-mask);width:0%"></div></div>
+      </div>
+      <div class="target-nums" id="tnum-hydro">0/4</div>
+    </div>
+
+    <div class="target-row">
+      <div class="target-dot" style="background:var(--col-spf)"></div>
+      <div class="target-info">
+        <div class="target-name">Bio-Collagen Film</div>
+        <div class="target-bar-wrap"><div class="target-bar-fill" id="tbar-bio" style="background:var(--col-spf);width:0%"></div></div>
+      </div>
+      <div class="target-nums" id="tnum-bio">0/2</div>
+    </div>
+  </div>
+
+  <!-- CALENDAR LEGEND -->
+  <div class="cal-legend">
+    <div class="cal-legend-item"><div class="cal-legend-swatch" style="background:rgba(168,196,160,0.5)"></div>Both routines</div>
+    <div class="cal-legend-item"><div class="cal-legend-swatch" style="background:rgba(232,180,100,0.35)"></div>Morning only</div>
+    <div class="cal-legend-item"><div class="cal-legend-swatch" style="background:rgba(168,136,200,0.35)"></div>Evening only</div>
+    <div class="cal-legend-item"><div class="cal-legend-swatch" style="background:rgba(232,120,120,0.25)"></div>Missed</div>
+    <div class="cal-legend-item"><div class="cal-dot dot-am" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold)"></div>AM</div>
+    <div class="cal-legend-item"><div class="cal-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--col-led)"></div>PM</div>
+    <div class="cal-legend-item"><div class="cal-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--col-serum)"></div>Needle</div>
+    <div class="cal-legend-item"><div class="cal-dot" style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--col-mask)"></div>Mask/LED</div>
+  </div>
+
+  <!-- CALENDAR -->
+  <div class="cal-grid">
+    <div class="tracker-month">
+      <div class="tracker-month-name" id="cal-month-name"></div>
+      <div class="tracker-nav">
+        <button class="tracker-nav-btn" onclick="changeMonth(-1)">‹</button>
+        <button class="tracker-nav-btn" onclick="changeMonth(1)">›</button>
+      </div>
+    </div>
+    <div class="tracker-year" id="cal-year"></div>
+    <div class="cal-days-header">
+      <div class="cal-day-name">M</div>
+      <div class="cal-day-name">T</div>
+      <div class="cal-day-name">W</div>
+      <div class="cal-day-name">T</div>
+      <div class="cal-day-name">F</div>
+      <div class="cal-day-name">S</div>
+      <div class="cal-day-name">S</div>
+    </div>
+    <div class="cal-cells" id="cal-cells"></div>
+  </div>
+
+  <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
+</div>
+
+<!-- MORNING -->
+<div id="morning" class="panel active">
+
+  <div class="notif-card" id="notif-card">
+    <div class="notif-title">◆ Daily Routine Reminders</div>
+    <div class="notif-text">Enable notifications for your 8:00 AM morning and 9:00 PM evening routine reminders.</div>
+    <button class="notif-btn" id="notif-btn" onclick="requestNotifications()">Enable Notifications</button>
+    <div class="notif-status" id="notif-status"></div>
+  </div>
+
+  <div class="day-strip">
+    <div>
+      <div class="day-label">Today</div>
+      <div class="day-value" id="today-str"></div>
+    </div>
+    <div class="step-count" id="am-count">0 / 7</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Morning Progress</span>
+      <span class="progress-pct" id="am-pct">0%</span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="am-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="section-label">Step 1 — Cleanse</div>
+  <div class="step-card cat-wash" id="am-1" onclick="toggle('am-1','am',6)">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-cat-label">Cleanser</div>
+      <div class="step-product">Clarins One-Step Exfoliating Cleanser</div>
+      <div class="step-action">Circular massage 60 secs. Lukewarm water only — hot strips your moisture barrier.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 2 — Tone</div>
+  <div class="step-card cat-tone" id="am-2" onclick="toggle('am-2','am',6)">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-cat-label">Toner</div>
+      <div class="step-product">Clarins Hydrating Toning Lotion</div>
+      <div class="step-action">Press into skin with palms — don't wipe. Restores pH and primes barrier for actives.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Steps 3–4 — Serums</div>
+  <div class="step-card cat-serum" id="am-3" onclick="toggle('am-3','am',6)">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-cat-label">Serum — Pigmentation</div>
+      <div class="step-product">Q+A Niacinamide Serum</div>
+      <div class="step-action">4–5 drops. Press into cheek patches and full face. Wait 60 secs before next step.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="step-card cat-serum" id="am-4" onclick="toggle('am-4','am',6)">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-cat-label">Serum — Repair</div>
+      <div class="step-product">Medicube PDRN Peptide Serum</div>
+      <div class="step-action">3–4 drops pressed gently — don't rub. Your most sophisticated serum. Every morning.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 5 — Moisturise</div>
+  <div class="step-card cat-cream" id="am-5" onclick="toggle('am-5','am',6)">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <div class="step-cat-label">Moisturiser</div>
+      <div class="step-product">Charlotte Tilbury Magic Cream</div>
+      <div class="step-action">Pea-sized amount, warm between fingers first. Your dedicated AM moisturiser for daytime dryness.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 6 — Protect</div>
+  <div class="step-card cat-spf" id="am-6" onclick="toggle('am-6','am',7)">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <div class="step-cat-label">SPF — Non-Negotiable</div>
+      <div class="step-product">Clarins Invisible Sun Stick SPF50</div>
+      <div class="step-action">Press generously over full face, ears, neck. Reapply at midday over makeup. Without this, all pigmentation work is undone.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 7 — Makeup</div>
+  <div class="step-card cat-makeup" id="am-7" onclick="toggle('am-7','am',7)">
+    <div class="step-num">7</div>
+    <div class="step-body">
+      <div class="step-cat-label">Base — Luminous Finish</div>
+      <div class="step-product">Charlotte Tilbury Flawless Filter — Shade 4</div>
+      <div class="step-action">Press over SPF with fingertips or damp sponge. Shade 4 is your warm olive match. Buildable — light for everyday, layered for more coverage. Satin-luminous finish suits your skin at 50 far better than matte.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <button class="reset-btn" onclick="resetPanel('am',7)">Reset Morning Routine</button>
+  <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
+</div>
+
+<!-- EVENING -->
+<div id="evening" class="panel">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Evening Progress</span>
+      <span class="progress-pct" id="pm-pct">0%</span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="pm-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="led-card">
+    <div class="led-eye">LED Protocol — 3–4× per week</div>
+    <div class="led-title">CurrentBody LED Mask</div>
+    <div class="led-sub">After serums absorb (2 min wait). Before moisturiser. Skip night after any microneedling.</div>
+    <div class="led-chips">
+      <span class="led-chip">⏱ 10 Minutes</span>
+      <span class="led-chip">Red → Collagen</span>
+      <span class="led-chip">NIR → Repair</span>
+    </div>
+  </div>
+
+  <div class="section-label">Step 1 — Double Cleanse</div>
+  <div class="step-card cat-wash" id="pm-1" onclick="toggle('pm-1','pm',7)">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <div class="step-cat-label">Cleanser</div>
+      <div class="step-product">Double Cleanse — Micellar Oil + Clarins</div>
+      <div class="step-action">First: micellar water or cleansing oil to remove SPF + makeup fully. Then: Clarins One-Step Cleanser. SPF must be gone before actives.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 2 — Tone</div>
+  <div class="step-card cat-tone" id="pm-2" onclick="toggle('pm-2','pm',7)">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <div class="step-cat-label">Toner</div>
+      <div class="step-product">Clarins Hydrating Toning Lotion</div>
+      <div class="step-action">Press into damp skin with palms. Restores pH and primes for serum absorption.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Steps 3–4 — Serums</div>
+  <div class="step-card cat-serum" id="pm-3" onclick="toggle('pm-3','pm',7)">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <div class="step-cat-label">Serum — Pigmentation</div>
+      <div class="step-product">Q+A Niacinamide Serum</div>
+      <div class="step-action">4–5 drops. Focus on cheek pigmentation patches. Reinforces daytime brightening work.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="step-card cat-serum" id="pm-4" onclick="toggle('pm-4','pm',7)">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <div class="step-cat-label">Serum — Repair</div>
+      <div class="step-product">Medicube PDRN Peptide Serum</div>
+      <div class="step-action">3–4 drops pressed gently. Night is when skin repairs — PDRN supports your regeneration cycle.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 5 — LED Mask</div>
+  <div class="step-card cat-led" id="pm-5" onclick="toggle('pm-5','pm',7)">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <div class="step-cat-label">LED — 3–4× Weekly</div>
+      <div class="step-product">CurrentBody LED Mask — 10 mins</div>
+      <div class="step-action">Wait 2 mins after serums. Lie back, relax. Do NOT use the night after microneedling.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 6 — Moisturise</div>
+  <div class="step-card cat-cream" id="pm-6" onclick="toggle('pm-6','pm',7)">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <div class="step-cat-label">Moisturiser — Barrier Repair</div>
+      <div class="step-product">Dr Jart+ Ceramidin Milky Lotion</div>
+      <div class="step-action">Generous application while skin is warm from LED. Ceramide NP + Panthenol repair your barrier overnight.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Step 7 — Eyes</div>
+  <div class="step-card cat-eye" id="pm-7" onclick="toggle('pm-7','pm',7)">
+    <div class="step-num">7</div>
+    <div class="step-body">
+      <div class="step-cat-label">Eye Cream</div>
+      <div class="step-product">Origins Ginzing Eye Cream</div>
+      <div class="step-action">Tiny amount, ring finger tap only — never drag. Under eye and orbital bone only.</div>
+    </div>
+    <div class="check">✓</div>
+  </div>
+
+  <button class="reset-btn" onclick="resetPanel('pm',7)">Reset Evening Routine</button>
+  <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
+</div>
+
+<!-- WEEKLY -->
+<div id="weekly" class="panel">
+  <div class="section-label">Weekly Treatments</div>
+
+  <div class="weekly-card" style="border-left:4px solid var(--col-led)">
+    <div class="weekly-day" style="color:var(--col-led)">Mon · Wed · Fri · Sun</div>
+    <div class="weekly-title">CurrentBody LED Mask</div>
+    <div class="weekly-desc">10 mins after serums. Always before moisturiser. Skip night after any microneedling.</div>
+  </div>
+
+  <div class="weekly-card" style="border-left:4px solid var(--col-serum)">
+    <div class="weekly-day" style="color:var(--col-serum)">Tue · Fri</div>
+    <div class="weekly-title">Xioimy Dissolving Microneedle</div>
+    <div class="weekly-desc">Cleansed dry skin. Press firmly 30 secs, leave overnight. Delivers niacinamide + Vit C directly into skin — your current best pigmentation tool. Follow with Ceramidin only. Do NOT use same night as LED mask.</div>
+  </div>
+
+  <div class="weekly-card" style="border-left:4px solid var(--gold)">
+    <div class="weekly-day" style="color:var(--gold)">Wednesday or Thursday</div>
+    <div class="weekly-title">Eelhoe Dark Spot Patches</div>
+    <div class="weekly-desc">Press directly on cheek pigmentation patches. Leave overnight. Non-needling nights only.</div>
+  </div>
+
+  <div class="weekly-card" style="border-left:4px solid var(--col-mask)">
+    <div class="weekly-day" style="color:var(--col-mask)">Thursday</div>
+    <div class="weekly-title">CurrentBody Hydrogel Mask + LED</div>
+    <div class="weekly-desc">Apply hydrogel 15 mins first, remove, then do LED session. Maximum hydration + light therapy combo.</div>
+  </div>
+
+  <div class="weekly-card" style="border-left:4px solid var(--col-mask)">
+    <div class="weekly-day" style="color:var(--col-mask)">Sunday</div>
+    <div class="weekly-title">Rest or Bio-Collagen Film</div>
+    <div class="weekly-desc">Let skin recover. Optionally use Xioimy Bio-Collagen Film on forehead + cheeks as a hydration treat. Press firmly and leave to dissolve. No needling — this is your skin's recovery night.</div>
+  </div>
+
+  <div class="weekly-card" style="border-left:4px solid var(--col-mask)">
+    <div class="weekly-day" style="color:var(--col-mask)">Every Other Sunday</div>
+    <div class="weekly-title">Xioimy Bio-Collagen Film</div>
+    <div class="weekly-desc">Forehead + cheeks. Press firmly and leave to dissolve. Use as hydration treatment only — topical collagen films cannot structurally replace collagen.</div>
+  </div>
+
+  <div class="rules-card">
+    <div class="rules-label">⚠ Critical Rules — Never Break</div>
+    <div class="rule-item">Never microneedle two nights in a row — Tue + Fri max</div>
+    <div class="rule-item">Never use Xioimy microneedle same night as LED mask</div>
+    <div class="rule-item">Always SPF50 the morning after any needling</div>
+    <div class="rule-item">No strong actives (Vit C, retinoids) for 48h post-needling</div>
+  </div>
+  <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
+</div>
+
+<!-- PRODUCTS -->
+<div id="audit" class="panel">
+  <div class="section-label">Keep — Core Routine</div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Medicube PDRN Peptide Serum</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">Your best serum. AM + PM daily. Most powerful post-LED and post-needling.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Niacinamide Serum</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">Essential for pigmentation. AM + PM without fail.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Dr Jart+ Ceramidin Milky Lotion</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">PM moisturiser only. Ceramide NP + Panthenol repair barrier overnight.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Charlotte Tilbury Magic Cream</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">AM moisturiser only. Keep specifically here — richer for daytime dryness.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Clarins SPF50 Invisible Stick</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">Non-negotiable daily. Apply generously. Reapply at midday.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Clarins One-Step Exfoliating Cleanser</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">AM cleanse. PM always needs double cleanse first.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Clarins Hydrating Toning Lotion</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">Replaces Q+A Niacinamide Toner — better formulated for dry skin. AM + PM.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Origins Ginzing Eye Cream</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:var(--col-wash)">Keep</span></div><div class="audit-note">PM only. Caffeine addresses structural under-eye darkness.</div></div>
+
+  <div class="section-label">Removed — Redundant Products</div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Hyaluronic Acid Serum</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Removed</span></div><div class="audit-note">Redundant — your other serums cover hydration. Use remaining stock as microneedling slip layer only.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Niacinamide Daily Toner</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Removed</span></div><div class="audit-note">Redundant with Q+A Niacinamide Serum which is higher concentration. Replaced by Clarins Toning Lotion.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Collagen Booster Serum</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Removed</span></div><div class="audit-note">Topical collagen cannot penetrate skin. PDRN peptides do this job far better.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Laneige Bouncy & Firm Serum</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Removed</span></div><div class="audit-note">Overlaps with Ceramidin as PM barrier. Use remaining stock as occasional occlusive on very dry nights only.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Clarins Extra-Firming Day Cream</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Removed</span></div><div class="audit-note">Redundant with Magic Cream as AM moisturiser. Don't run both.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Guerlain Abeille Royale</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Removed</span></div><div class="audit-note">Overlaps with PDRN and Ceramidin. Weekend treat only if you love the texture — not worth repurchasing.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Weleda Skin Food</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Reassigned</span></div><div class="audit-note">Too heavy and occlusive for face. Reassigned to hands, feet, and dry body patches only.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Laura Mercier Tinted Moisturiser</div><span class="audit-badge" style="background:rgba(232,120,120,0.12);color:var(--col-serum)">Replaced</span></div><div class="audit-note">Matte finish not ideal at 50 — can settle into fine lines. Replace with Charlotte Tilbury Flawless Filter (Shade 4) for a more flattering satin finish.</div></div>
+
+  <div class="gaps-card">
+    <div class="gaps-label">◆ Still Needed — Buy Next</div>
+    <div class="gap-item">
+      <div class="gap-title">Tretinoin or Azelaic Acid</div>
+      <div class="gap-desc">Visit dermatica.co.uk — prescription via online dermatologist. This single product will outperform everything else on your shelf for pigmentation.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-title">Micellar Water or Cleansing Oil</div>
+      <div class="gap-desc">Essential for proper PM double cleanse. SPF must be fully removed before actives can penetrate effectively.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-title">FaceGym Brightening Active Roller</div>
+      <div class="gap-desc">facegym.com or Space NK. Dissolving Vit C + Tranexamic acid needles — your single most impactful next purchase for pigmentation. Currently substituted by Xioimy but FaceGym is more targeted and effective.</div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-title">Charlotte Tilbury Flawless Filter — Shade 4</div>
+      <div class="gap-desc">Replaces Laura Mercier. Satin-luminous finish far more flattering on olive skin at 50. Covers pigmentation better with buildable coverage.</div>
+    </div>
+  </div>
+  <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
+</div>
+
+<script>
+  const amDone = new Set();
+  const pmDone = new Set();
+
+  // ── TRACKER STORAGE ──────────────────────────────────────
+  function getLog() {
+    try { return JSON.parse(localStorage.getItem('alibi-log') || '{}'); }
+    catch(e) { return {}; }
+  }
+  function saveLog(log) {
+    localStorage.setItem('alibi-log', JSON.stringify(log));
+  }
+  function todayKey() {
+    const n = new Date();
+    return n.getFullYear() + '-' + String(n.getMonth()+1).padStart(2,'0') + '-' + String(n.getDate()).padStart(2,'0');
+  }
+  function dateKey(y, m, d) {
+    return y + '-' + String(m+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+  }
+
+  function logRoutine(slot) {
+    const log = getLog();
+    const key = todayKey();
+    if (!log[key]) log[key] = {};
+    // Toggle
+    log[key][slot] = !log[key][slot];
+    saveLog(log);
+    updateLogButtons();
+    renderCalendar();
+    updateStats();
+    updateStreak();
+  }
+
+  function logWeekly(treatment) {
+    const log = getLog();
+    const key = todayKey();
+    if (!log[key]) log[key] = {};
+    if (!log[key].weekly) log[key].weekly = {};
+    // Toggle
+    log[key].weekly[treatment] = !log[key].weekly[treatment];
+    saveLog(log);
+    updateWeeklyButtons();
+    renderCalendar();
+    updateTargets();
+  }
+
+  function updateLogButtons() {
+    const log = getLog();
+    const key = todayKey();
+    const entry = log[key] || {};
+    const amBtn = document.getElementById('log-am-btn');
+    const pmBtn = document.getElementById('log-pm-btn');
+    if (amBtn) amBtn.className = 'log-btn' + (entry.am ? ' logged-am' : '');
+    if (pmBtn) pmBtn.className = 'log-btn' + (entry.pm ? ' logged-pm' : '');
+  }
+
+  const weeklyTreatments = [
+    { key: 'led',    cls: 'logged-led',    target: 12 },
+    { key: 'needle', cls: 'logged-needle', target: 8  },
+    { key: 'patch',  cls: 'logged-patch',  target: 4  },
+    { key: 'hydro',  cls: 'logged-hydro',  target: 4  },
+    { key: 'bio',    cls: 'logged-bio',    target: 2  },
+  ];
+
+  function updateWeeklyButtons() {
+    const log = getLog();
+    const key = todayKey();
+    const weekly = (log[key] && log[key].weekly) ? log[key].weekly : {};
+    weeklyTreatments.forEach(t => {
+      const btn = document.getElementById('log-' + t.key + '-btn');
+      if (!btn) return;
+      if (weekly[t.key]) {
+        btn.className = 'weekly-log-btn ' + t.cls + ' logged';
+      } else {
+        btn.className = 'weekly-log-btn';
+      }
+    });
+  }
+
+  function updateTargets() {
+    const log = getLog();
+    const now = new Date();
+    const counts = { led: 0, needle: 0, patch: 0, hydro: 0, bio: 0 };
+
+    // Count all entries this calendar month
+    Object.entries(log).forEach(([key, entry]) => {
+      const [y, m] = key.split('-').map(Number);
+      if (y === now.getFullYear() && m === now.getMonth() + 1) {
+        if (entry.weekly) {
+          Object.keys(counts).forEach(t => {
+            if (entry.weekly[t]) counts[t]++;
+          });
+        }
+      }
+    });
+
+    weeklyTreatments.forEach(t => {
+      const pct = Math.min(100, Math.round((counts[t.key] / t.target) * 100));
+      const bar = document.getElementById('tbar-' + t.key);
+      const num = document.getElementById('tnum-' + t.key);
+      if (bar) bar.style.width = pct + '%';
+      if (num) num.textContent = counts[t.key] + '/' + t.target;
+    });
+  }
+
+  // ── CALENDAR ──────────────────────────────────────────────
+  let calYear, calMonth;
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function initCalendar() {
+    const n = new Date();
+    calYear = n.getFullYear();
+    calMonth = n.getMonth();
+    renderCalendar();
+  }
+
+  function changeMonth(dir) {
+    calMonth += dir;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    if (calMonth < 0)  { calMonth = 11; calYear--; }
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    const log = getLog();
+    const now = new Date();
+    const todayStr = todayKey();
+
+    document.getElementById('cal-month-name').textContent = monthNames[calMonth];
+    document.getElementById('cal-year').textContent = calYear;
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay(); // 0=Sun
+    // Convert to Mon-first: Mon=0 ... Sun=6
+    const startOffset = (firstDay === 0) ? 6 : firstDay - 1;
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+    const cells = document.getElementById('cal-cells');
+    cells.innerHTML = '';
+
+    // Empty cells before first day
+    for (let i = 0; i < startOffset; i++) {
+      const empty = document.createElement('div');
+      empty.className = 'cal-cell empty';
+      cells.appendChild(empty);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const key = dateKey(calYear, calMonth, d);
+      const cell = document.createElement('div');
+      const entry = log[key] || null;
+      const cellDate = new Date(calYear, calMonth, d);
+      const isToday = key === todayStr;
+      const isFuture = cellDate > now && !isToday;
+      const isPast = cellDate < now && !isToday;
+
+      let statusClass = '';
+      if (!isFuture) {
+        if (entry && entry.am && entry.pm) statusClass = 'both';
+        else if (entry && entry.am) statusClass = 'am-only';
+        else if (entry && entry.pm) statusClass = 'pm-only';
+        else if (isPast) statusClass = 'missed';
+      }
+
+      cell.className = 'cal-cell ' + statusClass + (isToday ? ' today' : '') + (isFuture ? ' future' : '');
+
+      const dateDiv = document.createElement('div');
+      dateDiv.className = 'cal-date';
+      dateDiv.textContent = d;
+      cell.appendChild(dateDiv);
+
+      if (!isFuture && entry) {
+        const dots = document.createElement('div');
+        dots.className = 'cal-dots';
+        if (entry.am) { const dot = document.createElement('div'); dot.className = 'cal-dot dot-am'; dots.appendChild(dot); }
+        if (entry.pm) { const dot = document.createElement('div'); dot.className = 'cal-dot dot-pm'; dots.appendChild(dot); }
+        // Weekly treatment dots
+        if (entry.weekly) {
+          if (entry.weekly.led)    { const dot = document.createElement('div'); dot.className = 'cal-dot'; dot.style.background='var(--col-led)'; dots.appendChild(dot); }
+          if (entry.weekly.needle) { const dot = document.createElement('div'); dot.className = 'cal-dot'; dot.style.background='var(--col-serum)'; dots.appendChild(dot); }
+          if (entry.weekly.patch || entry.weekly.hydro || entry.weekly.bio) {
+            const dot = document.createElement('div'); dot.className = 'cal-dot'; dot.style.background='var(--col-mask)'; dots.appendChild(dot);
+          }
+        }
+        cell.appendChild(dots);
+      }
+
+      cells.appendChild(cell);
+    }
+  }
+
+  function updateStats() {
+    const log = getLog();
+    const now = new Date();
+    let complete = 0, partial = 0, missed = 0;
+
+    // Count from start of current month
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    for (let d = new Date(startOfMonth); d <= yesterday; d.setDate(d.getDate() + 1)) {
+      const key = dateKey(d.getFullYear(), d.getMonth(), d.getDate());
+      const entry = log[key];
+      if (entry && entry.am && entry.pm) complete++;
+      else if (entry && (entry.am || entry.pm)) partial++;
+      else missed++;
+    }
+
+    // Include today if logged
+    const todayEntry = log[todayKey()];
+    if (todayEntry && todayEntry.am && todayEntry.pm) complete++;
+    else if (todayEntry && (todayEntry.am || todayEntry.pm)) partial++;
+
+    document.getElementById('stat-complete').textContent = complete;
+    document.getElementById('stat-partial').textContent = partial;
+    document.getElementById('stat-missed').textContent = missed;
+  }
+
+  function updateStreak() {
+    const log = getLog();
+    const now = new Date();
+    let streak = 0;
+    let d = new Date(now);
+
+    // Check today first
+    const todayEntry = log[todayKey()];
+    const todayComplete = todayEntry && todayEntry.am && todayEntry.pm;
+
+    // Walk backwards from yesterday
+    d.setDate(d.getDate() - (todayComplete ? 0 : 1));
+
+    for (let i = 0; i < 365; i++) {
+      const key = dateKey(d.getFullYear(), d.getMonth(), d.getDate());
+      const entry = log[key];
+      if (entry && entry.am && entry.pm) {
+        streak++;
+        d.setDate(d.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+
+    document.getElementById('streak-num').textContent = streak;
+    if (streak === 0) {
+      document.getElementById('streak-sub').textContent = 'Complete both routines today to start your streak';
+    } else if (streak === 1) {
+      document.getElementById('streak-sub').textContent = 'Great start — keep it going tomorrow!';
+    } else if (streak < 7) {
+      document.getElementById('streak-sub').textContent = streak + ' days strong — nearly a week!';
+    } else if (streak < 30) {
+      document.getElementById('streak-sub').textContent = streak + ' days — your skin is noticing the difference';
+    } else {
+      document.getElementById('streak-sub').textContent = streak + ' days — remarkable consistency';
+    }
+  }
+  const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const now = new Date();
+  document.getElementById("today-str").textContent = days[now.getDay()] + " " + now.getDate() + " " + months[now.getMonth()];
+
+  function switchTab(name, btn) {
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.getElementById(name).classList.add("active");
+    btn.classList.add("active");
+    if (name === 'tracker') {
+      renderCalendar();
+      updateStats();
+      updateStreak();
+      updateLogButtons();
+      updateWeeklyButtons();
+      updateTargets();
+    }
+  }
+
+  function toggle(id, panel, total) {
+    const card = document.getElementById(id);
+    const set = panel === "am" ? amDone : pmDone;
+    if (set.has(id)) { set.delete(id); card.classList.remove("done"); }
+    else { set.add(id); card.classList.add("done"); }
+    updateProgress(panel, total);
+  }
+
+  function updateProgress(panel, total) {
+    const set = panel === "am" ? amDone : pmDone;
+    const pct = Math.round((set.size / total) * 100);
+    document.getElementById(panel + "-pct").textContent = pct + "%";
+    document.getElementById(panel + "-bar").style.width = pct + "%";
+    if (panel === "am") document.getElementById("am-count").textContent = set.size + " / " + total;
+  }
+
+  function resetPanel(panel, total) {
+    const set = panel === "am" ? amDone : pmDone;
+    set.clear();
+    const prefix = panel === "am" ? "am" : "pm";
+    for (let i = 1; i <= total; i++) {
+      const c = document.getElementById(prefix + "-" + i);
+      if (c) c.classList.remove("done");
+    }
+    updateProgress(panel, total);
+  }
+
+  function requestNotifications() {
+    if (!("Notification" in window)) {
+      showStatus("Notifications not supported on this browser.");
+      return;
+    }
+    Notification.requestPermission().then(function(permission) {
+      if (permission === "granted") {
+        document.getElementById("notif-btn").disabled = true;
+        showStatus("✓ Reminders enabled — 8:00 AM & 9:00 PM daily");
+        scheduleNotifications();
+        setTimeout(() => {
+          document.getElementById("notif-card").style.display = "none";
+          localStorage.setItem("alibi-notif", "granted");
+        }, 3000);
+      } else {
+        showStatus("Blocked. Go to Settings → Safari → Notifications to enable.");
+      }
+    });
+  }
+
+  function showStatus(msg) {
+    const el = document.getElementById("notif-status");
+    el.textContent = msg;
+    el.style.display = "block";
+  }
+
+  function scheduleDaily(hour, minute, title, body) {
+    const now = new Date();
+    const next = new Date();
+    next.setHours(hour, minute, 0, 0);
+    if (next <= now) next.setDate(next.getDate() + 1);
+    const delay = next - now;
+    setTimeout(function fire() {
+      new Notification(title, { body: body, tag: "alibi-" + hour, requireInteraction: true });
+      setTimeout(fire, 24 * 60 * 60 * 1000);
+    }, delay);
+  }
+
+  function scheduleNotifications() {
+    scheduleDaily(8, 0, "ALIBI ☀ Morning Routine", "Your 6-step morning protocol is ready. Tap to open.");
+    scheduleDaily(21, 0, "ALIBI ◑ Evening Routine", "Time for your 7-step evening routine and LED mask.");
+  }
+
+  if (typeof Notification !== "undefined" && Notification.permission === "granted" && localStorage.getItem("alibi-notif") === "granted") {
+    document.getElementById("notif-card").style.display = "none";
+    scheduleNotifications();
+  }
+
+  // Init tracker
+  initCalendar();
+  updateStats();
+  updateStreak();
+  updateLogButtons();
+  updateWeeklyButtons();
+  updateTargets();
+</script>
+</body>
+</html>
