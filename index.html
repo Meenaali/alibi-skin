@@ -360,25 +360,35 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
     <div class="check">✓</div>
   </div>
 
-  <div class="section-label">Steps 3–4 — Serums</div>
+  <!-- After-tone weekly treatment (microneedle / hydrogel) -->
+  <div id="pm-dynamic-step"></div>
+
+  <div class="section-label" id="pm-serums-label">Steps 3–4 — Serums</div>
+  <div id="pm-serums-section">
   <div class="step-card cat-serum" id="pm-3" onclick="toggleStep('pm-3','pm')">
-    <div class="step-num">3</div>
+    <div class="step-num" id="pm-3-num">3</div>
     <div class="step-body"><div class="step-cat-label">Serum — Niacinamide + Vitamin C</div><div class="step-product">Charlotte Tilbury Magic Serum</div><div class="step-action">4–5 drops pressed gently. PM is where Magic Serum does its best work — niacinamide, polyglutamic acid, and Vitamin C all working overnight. Use Q+A Niacinamide in AM until it's gone.</div></div>
     <div class="check">✓</div>
   </div>
   <div class="step-card cat-serum" id="pm-4" onclick="toggleStep('pm-4','pm')">
-    <div class="step-num">4</div>
+    <div class="step-num" id="pm-4-num">4</div>
     <div class="step-body"><div class="step-cat-label">Serum — Repair</div><div class="step-product">Medicube PDRN Peptide Serum</div><div class="step-action">3–4 drops pressed gently. Night is when skin repairs — PDRN drives fibroblast activity during your regeneration cycle.</div></div>
     <div class="check">✓</div>
   </div>
+  </div>
 
-  <!-- Dynamic step 5 — LED (Mon/Wed/Fri) or standard step -->
-  <div id="pm-dynamic-step"></div>
+  <!-- LED step (Mon/Wed/Fri) -->
+  <div id="pm-led-container"></div>
+
+  <!-- After-serums weekly treatment (patches / bio-collagen) -->
+  <div id="weekly-treatment-container"></div>
 
   <div class="section-label" id="pm-moist-label">Step 6 — Moisturise</div>
   <div class="step-card cat-cream" id="pm-6" onclick="toggleStep('pm-6','pm')">
     <div class="step-num" id="pm-6-num">6</div>
-    <div class="step-body"><div class="step-cat-label">Moisturiser — PM</div><div class="step-product">Charlotte Tilbury Magic Cream</div><div class="step-action">Richer and more occlusive than the Clarins — ideal for overnight repair when your skin has more time to absorb. Apply generously while skin is warm.</div></div>
+    <div class="step-body"><div class="step-cat-label">Moisturiser — PM</div>
+    <div class="step-product" id="pm-moist-product">Charlotte Tilbury Magic Cream</div>
+    <div class="step-action" id="pm-moist-action">Richer and more occlusive than the Clarins — ideal for overnight repair. Apply generously while skin is warm.</div></div>
     <div class="check">✓</div>
   </div>
 
@@ -388,9 +398,6 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
     <div class="step-body"><div class="step-cat-label">Eye Cream</div><div class="step-product">Origins Ginzing Eye Cream</div><div class="step-action">Tiny amount, ring finger tap only — never drag. Under eye and orbital bone only.</div></div>
     <div class="check">✓</div>
   </div>
-
-  <!-- Weekly treatment step 8 -->
-  <div id="weekly-treatment-container"></div>
 
   <button class="reset-btn" onclick="manualReset('pm')">Reset Evening Routine</button>
   <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
@@ -552,14 +559,42 @@ const dayOfWeek = now.getDay(); // 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
 const isLEDNight = [1,3,5].includes(dayOfWeek);
 
 // ── WEEKLY TREATMENT BY DAY ───────────────────────────────
-// Tue=2 and Fri=5 → microneedle, Wed=3 → patch, Thu=4 → hydrogel, Sun=0 → bio
-// Note: Fri also has LED — microneedle would conflict, so Fri evening is LED only, microneedle moves to Tue only
-// Revised: Tue=needle, Wed=patch+LED, Thu=hydrogel, Fri=LED only, Sun=bio
+// Each treatment has a 'position' — where in the sequence it sits:
+// 'after-tone' = insert after step 2 (tone), before serums
+// 'after-serums' = insert after PDRN (step 4), before moisturiser
+// Microneedle: after tone, BEFORE serums (creates channels for serums to absorb into)
+// Hydrogel: after tone, BEFORE serums (prep treatment)
+// Dark spot patches: after serums, BEFORE moisturiser
+// Bio-Collagen Film: after serums, BEFORE moisturiser (needs open channels)
 const weeklyByDay = {
-  2: { key:'needle', cat:'cat-needle', catLabel:'Microneedle — Tuesday', product:'Xioimy Dissolving Microneedle', action:'Press firmly on cleansed dry skin for 30 secs, leave overnight. Niacinamide + Vit C dissolve directly into skin. Follow with Ceramidin only — no other actives tonight. SPF50 tomorrow morning.', stepNum:8 },
-  3: { key:'patch',  cat:'cat-patch',  catLabel:'Dark Spot Patches — Wednesday', product:'Eelhoe Dark Spot Patches', action:'Press patches directly onto cheek pigmentation patches after serums. Leave overnight. Safe to combine with serums on LED nights.', stepNum:8 },
-  4: { key:'hydro',  cat:'cat-hydro',  catLabel:'Hydrogel Mask — Thursday', product:'CurrentBody Hydrogel Mask', action:'Apply hydrogel for 15 mins before serums, remove, then continue routine. No LED tonight — Thursday is a dedicated hydration recovery night.', stepNum:8 },
-  0: { key:'bio',    cat:'cat-bio',    catLabel:'Bio-Collagen Film — Sunday', product:'Xioimy Bio-Collagen Film', action:'Recovery night. Press film firmly to forehead + cheeks, leave to dissolve. Targeted hydration treatment. No needling or LED tonight.', stepNum:8 },
+  2: { 
+    key:'needle', cat:'cat-needle', 
+    catLabel:'Microneedle — Step 3 — Apply BEFORE Serums', 
+    product:'Xioimy Dissolving Microneedle', 
+    action:'Apply immediately after toning on cleansed dry skin. Press firmly for 30 secs — the dissolving needles create microchannels. Leave overnight. Use Ceramidin only on top — no other actives or serums tonight as they may irritate open channels. SPF50 essential tomorrow morning.',
+    position:'after-tone'
+  },
+  3: { 
+    key:'patch', cat:'cat-patch', 
+    catLabel:'Dark Spot Patches — Apply AFTER Serums', 
+    product:'Eelhoe Dark Spot Patches', 
+    action:'Apply after both serums have been absorbed. Press patches firmly directly onto your cheek pigmentation patches. Leave overnight. Apply Magic Cream around the patches, not over them.',
+    position:'after-serums'
+  },
+  4: { 
+    key:'hydro', cat:'cat-hydro', 
+    catLabel:'Hydrogel Mask — Apply BEFORE Serums', 
+    product:'CurrentBody Hydrogel Mask', 
+    action:'Apply immediately after toning — before any serums. Press onto face and leave for 15 mins, then remove. Your skin is now prepped and deeply hydrated. Continue with serums and moisturiser as normal after removing.',
+    position:'after-tone'
+  },
+  0: { 
+    key:'bio', cat:'cat-bio', 
+    catLabel:'Bio-Collagen Film — Apply AFTER Serums', 
+    product:'Xioimy Bio-Collagen Film', 
+    action:'Apply after both serums have absorbed — press film firmly to forehead and cheeks, leave to dissolve (10–15 mins). Then apply Magic Cream on top to seal. No needling or LED tonight — this is your recovery night.',
+    position:'after-serums'
+  },
 };
 
 // ── STEP STATE ────────────────────────────────────────────
@@ -568,50 +603,106 @@ const pmSteps = new Set();
 const AM_TOTAL = 7;
 
 function getPMTotal() {
-  const hasLED = isLEDNight;
-  const hasWeekly = !!weeklyByDay[dayOfWeek];
-  return 7 + (hasLED ? 1 : 0) + (hasWeekly ? 1 : 0);
+  // Always count from actual rendered DOM — never calculated separately
+  // This guarantees total always matches what's visible on screen
+  const allCards = document.querySelectorAll('.step-card');
+  let total = 0;
+  allCards.forEach(card => {
+    if (card.id && card.id.startsWith('pm-')) total++;
+  });
+  return total;
 }
 
 // ── RENDER DYNAMIC EVENING CONTENT ───────────────────────
+// Step sequence depends on day:
+// Base steps: 1=Cleanse, 2=Tone, [after-tone treatment?], 3/4=Serums, [LED?], [after-serums treatment?], Moisturise, Eyes
+// We build the full sequence and assign correct step numbers
+
 function renderEveningDynamic() {
-  // LED card
   document.getElementById('led-card').style.display = isLEDNight ? 'block' : 'none';
 
-  // Dynamic step 5 — LED or nothing
-  const dynStep = document.getElementById('pm-dynamic-step');
-  let stepOffset = 0;
+  const wt = weeklyByDay[dayOfWeek];
+  const hasAfterTone = wt && wt.position === 'after-tone';
+  const hasAfterSerums = wt && wt.position === 'after-serums';
 
-  if (isLEDNight) {
-    stepOffset = 1;
+  // Calculate step numbers based on what's present tonight
+  // Steps 1-2 always: Cleanse, Tone
+  let stepNum = 2;
+
+  // After-tone treatment (microneedle or hydrogel) — replaces serums tonight if microneedle
+  // For microneedle night: no serums, just Ceramidin after
+  const isNeedleNight = wt && wt.key === 'needle';
+
+  // After-tone step
+  let afterToneNum = 0;
+  if (hasAfterTone) { stepNum++; afterToneNum = stepNum; }
+
+  // Serum steps (skip on microneedle night)
+  let serum1Num = 0, serum2Num = 0;
+  if (!isNeedleNight) {
+    stepNum++; serum1Num = stepNum;
+    stepNum++; serum2Num = stepNum;
+  }
+
+  // LED step
+  let ledNum = 0;
+  if (isLEDNight && !isNeedleNight) { stepNum++; ledNum = stepNum; }
+
+  // After-serums treatment
+  let afterSerumsNum = 0;
+  if (hasAfterSerums) { stepNum++; afterSerumsNum = stepNum; }
+
+  // Moisturiser and eyes
+  const moistNum = ++stepNum;
+  const eyeNum = ++stepNum;
+
+  // ── BUILD DYNAMIC STEP (after tone) ──
+  const dynStep = document.getElementById('pm-dynamic-step');
+  if (hasAfterTone) {
     dynStep.innerHTML = `
-      <div class="section-label">Step 5 — LED Mask</div>
-      <div class="step-card cat-led" id="pm-5" onclick="toggleStep('pm-5','pm')">
-        <div class="step-num">5</div>
-        <div class="step-body"><div class="step-cat-label">LED — Mon · Wed · Fri</div><div class="step-product">CurrentBody LED Mask — 10 mins</div><div class="step-action">Wait 2 mins after serums absorb. Lie back, relax. Never on consecutive nights — rest days are essential.</div></div>
+      <div class="section-label">Step ${afterToneNum} — Apply BEFORE Serums ◀ Tonight</div>
+      <div class="step-card ${wt.cat}" id="pm-wt" onclick="toggleStep('pm-wt','pm')">
+        <div class="step-num">${afterToneNum}</div>
+        <div class="step-body"><div class="step-cat-label">${wt.catLabel}</div><div class="step-product">${wt.product}</div><div class="step-action">${wt.action}</div></div>
         <div class="check">✓</div>
       </div>`;
   } else {
     dynStep.innerHTML = '';
   }
 
-  // Update step numbers for moisturiser and eye
-  const moistNum = 5 + stepOffset;
-  const eyeNum = 6 + stepOffset;
-  document.getElementById('pm-6-num').textContent = moistNum;
-  document.getElementById('pm-7-num').textContent = eyeNum;
-  document.getElementById('pm-moist-label').textContent = 'Step '+moistNum+' — Moisturise';
-  document.getElementById('pm-eye-label').textContent = 'Step '+eyeNum+' — Eyes';
+  // ── SERUM SECTION ──
+  const serumsSection = document.getElementById('pm-serums-section');
+  if (isNeedleNight) {
+    // Hide serums on microneedle night — Ceramidin only after
+    serumsSection.style.display = 'none';
+  } else {
+    serumsSection.style.display = 'block';
+    document.getElementById('pm-3-num').textContent = serum1Num;
+    document.getElementById('pm-4-num').textContent = serum2Num;
+    document.getElementById('pm-serums-label').textContent = 'Steps '+serum1Num+'–'+serum2Num+' — Serums';
+  }
 
-  // Weekly treatment
+  // ── LED STEP ──
+  const ledContainer = document.getElementById('pm-led-container');
+  if (isLEDNight && !isNeedleNight) {
+    ledContainer.innerHTML = `
+      <div class="section-label">Step ${ledNum} — LED Mask</div>
+      <div class="step-card cat-led" id="pm-led" onclick="toggleStep('pm-led','pm')">
+        <div class="step-num">${ledNum}</div>
+        <div class="step-body"><div class="step-cat-label">LED — Mon · Wed · Fri</div><div class="step-product">CurrentBody LED Mask — 10 mins</div><div class="step-action">Wait 2 mins after serums absorb. Lie back, relax. Never on consecutive nights — rest days allow the repair cycle to complete.</div></div>
+        <div class="check">✓</div>
+      </div>`;
+  } else {
+    ledContainer.innerHTML = '';
+  }
+
+  // ── AFTER SERUMS TREATMENT ──
   const wtContainer = document.getElementById('weekly-treatment-container');
-  const wt = weeklyByDay[dayOfWeek];
-  if (wt) {
-    const wtNum = eyeNum + 1;
+  if (hasAfterSerums) {
     wtContainer.innerHTML = `
-      <div class="section-label">Step ${wtNum} — Tonight's Treatment</div>
-      <div class="step-card ${wt.cat}" id="pm-8" onclick="toggleStep('pm-8','pm')">
-        <div class="step-num">${wtNum}</div>
+      <div class="section-label">Step ${afterSerumsNum} — Apply AFTER Serums ◀ Tonight</div>
+      <div class="step-card ${wt.cat}" id="pm-wt" onclick="toggleStep('pm-wt','pm')">
+        <div class="step-num">${afterSerumsNum}</div>
         <div class="step-body"><div class="step-cat-label">${wt.catLabel}</div><div class="step-product">${wt.product}</div><div class="step-action">${wt.action}</div></div>
         <div class="check">✓</div>
       </div>`;
@@ -619,8 +710,26 @@ function renderEveningDynamic() {
     wtContainer.innerHTML = '';
   }
 
-  // Update PM count
-  document.getElementById('pm-count').textContent = '0 / ' + getPMTotal();
+  // ── MOISTURISER & EYES ──
+  document.getElementById('pm-6-num').textContent = moistNum;
+  document.getElementById('pm-7-num').textContent = eyeNum;
+  document.getElementById('pm-moist-label').textContent = 'Step '+moistNum+' — Moisturise';
+  document.getElementById('pm-eye-label').textContent = 'Step '+eyeNum+' — Eyes';
+
+  // On microneedle night, change moisturiser to Ceramidin only note
+  const moistProduct = document.getElementById('pm-moist-product');
+  const moistAction = document.getElementById('pm-moist-action');
+  if (isNeedleNight) {
+    moistProduct.textContent = 'Dr Jart+ Ceramidin Milky Lotion ONLY';
+    moistAction.textContent = 'Microneedle night — Ceramidin only. No Magic Cream tonight as richer creams can interfere with the dissolving actives. Generous application to seal the channels.';
+  } else {
+    moistProduct.textContent = 'Charlotte Tilbury Magic Cream';
+    moistAction.textContent = 'Richer and more occlusive than the Clarins — ideal for overnight repair. Apply generously while skin is warm.';
+  }
+
+  // ── UPDATE TOTAL from DOM after all cards rendered ──
+  // Small delay to ensure DOM has fully updated before counting
+  setTimeout(() => updateProgress('pm'), 50);
 }
 renderEveningDynamic();
 
@@ -681,21 +790,40 @@ function toggleStep(id, slot) {
   checkCompletion(slot);
 }
 
+function countPMDone() {
+  // Count done PM step cards from DOM — matches getPMTotal exactly
+  const allCards = document.querySelectorAll('.step-card');
+  let count = 0;
+  allCards.forEach(card => {
+    if (card.id && card.id.startsWith('pm-') && card.classList.contains('done')) count++;
+  });
+  return count;
+}
+
 function updateProgress(slot) {
-  const set = slot === 'am' ? amSteps : pmSteps;
-  const total = slot === 'am' ? AM_TOTAL : getPMTotal();
-  const pct = Math.round((set.size/total)*100);
-  document.getElementById(slot+'-pct').textContent = pct+'%';
-  document.getElementById(slot+'-bar').style.width = pct+'%';
-  if (slot === 'am') document.getElementById('am-count').textContent = set.size+' / '+AM_TOTAL;
-  else document.getElementById('pm-count').textContent = set.size+' / '+getPMTotal();
+  if (slot === 'am') {
+    const total = AM_TOTAL;
+    const done = amSteps.size;
+    const pct = Math.round((done/total)*100);
+    document.getElementById('am-pct').textContent = pct+'%';
+    document.getElementById('am-bar').style.width = pct+'%';
+    document.getElementById('am-count').textContent = done+' / '+total;
+  } else {
+    // Always read total and done from DOM so they are always in sync
+    const total = getPMTotal();
+    const done = countPMDone();
+    const pct = total > 0 ? Math.round((done/total)*100) : 0;
+    document.getElementById('pm-pct').textContent = pct+'%';
+    document.getElementById('pm-bar').style.width = pct+'%';
+    document.getElementById('pm-count').textContent = done+' / '+total;
+  }
 }
 
 function checkCompletion(slot) {
-  const set = slot === 'am' ? amSteps : pmSteps;
   const total = slot === 'am' ? AM_TOTAL : getPMTotal();
+  const doneCount = slot === 'am' ? amSteps.size : countPMDone();
   const banner = document.getElementById(slot+'-complete-banner');
-  if (set.size >= total) {
+  if (total > 0 && doneCount >= total) {
     banner.style.display = 'block';
     const log = getLog(); const key = todayKey();
     if (!log[key]) log[key] = {};
