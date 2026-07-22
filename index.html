@@ -259,7 +259,7 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
   </div>
   <div class="day-strip">
     <div><div class="day-label">Today</div><div class="day-value" id="today-str"></div></div>
-    <div class="step-count" id="am-count">0 / 7</div>
+    <div class="step-count" id="am-count">0 / 8</div>
   </div>
   <div class="reset-notice" id="am-reset-notice"></div>
   <div class="progress-wrap">
@@ -285,35 +285,42 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
     <div class="check">✓</div>
   </div>
 
-  <div class="section-label">Steps 3–4 — Serums</div>
+  <div class="section-label">Step 3 — Vitamin C Pad</div>
   <div class="step-card cat-serum" id="am-3" onclick="toggleStep('am-3','am')">
     <div class="step-num">3</div>
+    <div class="step-body"><div class="step-cat-label">Vitamin C + Exfoliation</div><div class="step-product">Medicube Deep Vita C Pad</div><div class="step-action">Swipe gently over full face after toning — one pad is enough. Deposits Vitamin C derivative and niacinamide 2% while lightly exfoliating. Skip on mornings after microneedling. Use daily or 5× weekly.</div></div>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="section-label">Steps 4–5 — Serums</div>
+  <div class="step-card cat-serum" id="am-4" onclick="toggleStep('am-4','am')">
+    <div class="step-num">4</div>
     <div class="step-body"><div class="step-cat-label">Serum — Niacinamide (use up Q+A first, then Magic Serum)</div><div class="step-product" id="am-serum-name">Q+A Niacinamide Serum → then Magic Serum</div><div class="step-action">4–5 drops. Press into cheek patches and full face. Wait 60 secs. Once Q+A is finished, Charlotte Tilbury Magic Serum takes this slot permanently — same niacinamide action plus polyglutamic acid and Vitamin C.</div></div>
     <div class="check">✓</div>
   </div>
-  <div class="step-card cat-serum" id="am-4" onclick="toggleStep('am-4','am')">
-    <div class="step-num">4</div>
+  <div class="step-card cat-serum" id="am-5" onclick="toggleStep('am-5','am')">
+    <div class="step-num">5</div>
     <div class="step-body"><div class="step-cat-label">Serum — Repair</div><div class="step-product">Medicube PDRN Peptide Serum</div><div class="step-action">3–4 drops pressed gently — don't rub. Stimulates your skin to produce its own collagen. Every morning without fail.</div></div>
     <div class="check">✓</div>
   </div>
 
-  <div class="section-label">Step 5 — Moisturise</div>
-  <div class="step-card cat-cream" id="am-5" onclick="toggleStep('am-5','am')">
-    <div class="step-num">5</div>
+  <div class="section-label">Step 6 — Moisturise</div>
+  <div class="step-card cat-cream" id="am-6" onclick="toggleStep('am-6','am')">
+    <div class="step-num">6</div>
     <div class="step-body"><div class="step-cat-label">Moisturiser — AM</div><div class="step-product">Clarins Extra-Firming Day Cream</div><div class="step-action">Designed specifically for daytime — firming actives with stronger clinical evidence than Magic Cream. Sits lighter under SPF and makeup. Warm between fingers first.</div></div>
     <div class="check">✓</div>
   </div>
 
-  <div class="section-label">Step 6 — Protect</div>
-  <div class="step-card cat-spf" id="am-6" onclick="toggleStep('am-6','am')">
-    <div class="step-num">6</div>
+  <div class="section-label">Step 7 — Protect</div>
+  <div class="step-card cat-spf" id="am-7" onclick="toggleStep('am-7','am')">
+    <div class="step-num">7</div>
     <div class="step-body"><div class="step-cat-label">SPF — Non-Negotiable</div><div class="step-product">Clarins Invisible Sun Stick SPF50</div><div class="step-action">Press generously over full face, ears, neck. Reapply at midday over makeup. Without this all pigmentation work is undone.</div></div>
     <div class="check">✓</div>
   </div>
 
-  <div class="section-label">Step 7 — Makeup</div>
-  <div class="step-card cat-makeup" id="am-7" onclick="toggleStep('am-7','am')">
-    <div class="step-num">7</div>
+  <div class="section-label">Step 8 — Makeup</div>
+  <div class="step-card cat-makeup" id="am-8" onclick="toggleStep('am-8','am')">
+    <div class="step-num">8</div>
     <div class="step-body"><div class="step-cat-label">Base — Luminous Finish</div><div class="step-product">Charlotte Tilbury Flawless Filter — Shade 4</div><div class="step-action">Press over SPF with fingertips or damp sponge. Buildable coverage. Satin-luminous finish is far more flattering on olive skin at 50 than matte.</div></div>
     <div class="check">✓</div>
   </div>
@@ -374,19 +381,24 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
   <div class="section-label pm-step-conditional" id="lbl-hydro" style="display:none">Step 3 — Treatment ◀ Apply BEFORE Serums</div>
   <div class="step-card cat-hydro pm-step pm-step-conditional" id="pm-hydro" style="display:none" onclick="toggleStep('pm-hydro','pm')">
     <div class="step-num">3</div>
-    <div class="step-body"><div class="step-cat-label">Hydrogel Mask — Apply BEFORE Serums Tonight</div><div class="step-product">CurrentBody Hydrogel Mask</div><div class="step-action">Apply immediately after toning — press onto face, leave 15 mins, remove. Your skin is now deeply prepped. Continue with serums and moisturiser as normal after removing.</div></div>
+    <div class="step-body"><div class="step-cat-label">Sheet Mask — Apply BEFORE Serums Tonight</div><div class="step-product">Biodance Facial Sheet Mask</div><div class="step-action">Apply immediately after toning — press firmly onto face, leave 20 mins, remove. Press remaining essence into skin with palms — do not rinse. Ferment filtrate brightens and supports your barrier. Continue with serums as normal after removing.</div></div>
     <div class="check">✓</div>
   </div>
 
   <!-- SERUMS — hidden on microneedle night -->
-  <div class="section-label" id="lbl-serums">Steps 3–4 — Serums</div>
+  <div class="section-label" id="lbl-serums">Serums</div>
+  <div class="step-card cat-serum pm-step" id="pm-txa" onclick="toggleStep('pm-txa','pm')">
+    <div class="step-num" id="pm-txa-num">3</div>
+    <div class="step-body"><div class="step-cat-label">Serum — Tranexamic Acid</div><div class="step-product">Haruharu Wonder Centella 4% TXA Gel Serum</div><div class="step-action">Apply first — TXA needs direct skin contact to target melanin pathways. 3–4 drops pressed gently into cheeks and full face. Wait 60 secs. Use every PM except microneedle nights.</div></div>
+    <div class="check">✓</div>
+  </div>
   <div class="step-card cat-serum pm-step" id="pm-3" onclick="toggleStep('pm-3','pm')">
-    <div class="step-num" id="pm-3-num">3</div>
+    <div class="step-num" id="pm-3-num">4</div>
     <div class="step-body"><div class="step-cat-label">Serum — Niacinamide + Vitamin C</div><div class="step-product">Charlotte Tilbury Magic Serum</div><div class="step-action">4–5 drops pressed gently. PM is where Magic Serum works best — niacinamide, polyglutamic acid, and Vitamin C all overnight. Use Q+A Niacinamide in AM until it runs out.</div></div>
     <div class="check">✓</div>
   </div>
   <div class="step-card cat-serum pm-step" id="pm-4" onclick="toggleStep('pm-4','pm')">
-    <div class="step-num" id="pm-4-num">4</div>
+    <div class="step-num" id="pm-4-num">5</div>
     <div class="step-body"><div class="step-cat-label">Serum — Repair</div><div class="step-product">Medicube PDRN Peptide Serum</div><div class="step-action">3–4 drops pressed gently. Night is when skin repairs — PDRN drives fibroblast activity during your regeneration cycle.</div></div>
     <div class="check">✓</div>
   </div>
@@ -429,7 +441,7 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
   <div class="section-label" id="pm-eye-label">Step — Eyes</div>
   <div class="step-card cat-eye pm-step" id="pm-7" onclick="toggleStep('pm-7','pm')">
     <div class="step-num" id="pm-7-num">6</div>
-    <div class="step-body"><div class="step-cat-label">Eye Cream</div><div class="step-product">Origins Ginzing Eye Cream</div><div class="step-action">Tiny amount, ring finger tap only — never drag. Under eye and orbital bone only.</div></div>
+    <div class="step-body"><div class="step-cat-label">Eye Serum — Retinal</div><div class="step-product">Beauty of Joseon Revive Eye Serum</div><div class="step-action">Tiny amount, ring finger tap only — never drag. Under eye and orbital bone only. Contains retinal — start 2× weekly for first 2 weeks, build to nightly over 4–6 weeks. Do not use on microneedle nights.</div></div>
     <div class="check">✓</div>
   </div>
 
@@ -539,12 +551,16 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Clarins One-Step Exfoliating Cleanser</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">AM cleanse. PM always needs double cleanse first to remove SPF fully.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Clarins Hydrating Toning Lotion</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">Replaces Q+A Niacinamide Toner permanently. AM + PM.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Charlotte Tilbury Flawless Filter — Shade 4</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">Your daily base over SPF. Satin-luminous finish. Shade 4 is your warm olive match.</div></div>
-  <div class="audit-card"><div class="audit-top"><div class="audit-product">Origins Ginzing Eye Cream</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">PM only. Caffeine addresses structural under-eye darkness. Ring finger tap — never drag.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Beauty of Joseon Revive Eye Serum</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">Replaces Origins. Retinal + ginseng — significantly more active. Start 2× weekly, build to nightly over 4–6 weeks. Ring finger tap only. Not on microneedle nights.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Medicube Deep Vita C Pad</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">AM Step 3 — after toning, before serums. Vitamin C derivative + niacinamide 2%. Fills your Vitamin C gap. Replaces need for standalone Vit C serum. Skip on mornings after microneedling.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Haruharu Wonder Centella 4% TXA Serum</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">PM first serum every night except microneedle nights. Tranexamic acid 4% — one of the best-evidenced ingredients for hormonal pigmentation on olive skin. Centella soothes inflammation.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Biodance Facial Sheet Mask</div><span class="audit-badge" style="background:rgba(168,196,160,0.2);color:#6A9E62">Repurchase</span></div><div class="audit-note">Thursday evenings — replaces CurrentBody Hydrogel Mask. Ferment filtrate brightens and supports barrier. Apply after toning, 20 mins, press remaining essence in. Better suited to your concerns than hydrogel.</div></div>
 
   <div class="audit-section">Use Up — Do Not Repurchase</div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Origins Ginzing Eye Cream</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Replaced</span></div><div class="audit-note">Replaced immediately by Beauty of Joseon Revive Eye Serum — retinal is significantly more active than caffeine for your concerns. No need to finish Origins first.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Niacinamide Serum</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Use Up</span></div><div class="audit-note">Currently in AM slot until finished. Replaced permanently by Charlotte Tilbury Magic Serum which does this job and more.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Niacinamide Daily Toner</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Use Up</span></div><div class="audit-note">Replaced by Clarins Hydrating Toning Lotion. Better formulated for dry skin.</div></div>
-  <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Hyaluronic Acid Serum</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Use Up</span></div><div class="audit-note">Use remaining stock as slip layer on microneedling nights only. Do not use in regular routine.</div></div>
+  <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Hyaluronic Acid Serum</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Not Needed</span></div><div class="audit-note">Removed from routine — redundant. Polyglutamic acid in the Magic Serum holds 4× more moisture than hyaluronic acid. Also covered by Clarins Toner, Magic Cream and Ceramidin. Use remaining stock as slip layer on microneedling nights only then do not repurchase.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Q+A Collagen Booster Serum</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Use Up</span></div><div class="audit-note">Topical collagen cannot penetrate the dermis — molecules are too large. PDRN stimulates your own collagen production far more effectively.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Laneige Bouncy & Firm Serum</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Use Up</span></div><div class="audit-note">PDRN handles firmness, Ceramidin handles overnight hydration — both functions covered better elsewhere.</div></div>
   <div class="audit-card"><div class="audit-top"><div class="audit-product">Laura Mercier Tinted Moisturiser</div><span class="audit-badge" style="background:rgba(232,180,100,0.2);color:#B8832A">Use Up</span></div><div class="audit-note">Replaced by Flawless Filter. Matte finish settles into fine lines — satin-luminous is more flattering at 50.</div></div>
@@ -572,8 +588,8 @@ body { font-family:Arial,Helvetica,sans-serif; background:var(--ivory); color:va
     </div>
     <div class="gap-item">
       <div class="gap-num">Priority 4</div>
-      <div class="gap-title">Standalone Vitamin C Serum (AM)</div>
-      <div class="gap-desc">Once Q+A is finished and Magic Serum runs both AM + PM slots, add a dedicated morning Vitamin C — The Ordinary Ascorbyl Glucoside 12% (affordable) or Skinceuticals CE Ferulic (gold standard). Boosts pigmentation results significantly.</div>
+      <div class="gap-title">FaceGym Brightening Active Roller</div>
+      <div class="gap-desc">facegym.com or Space NK. Dissolving Vit C + Tranexamic acid needles — a significant upgrade from Xioimy when ready. Now that you have TXA serum in your PM routine the FaceGym would turbocharge results further.</div>
     </div>
   </div>
   <div class="case-stamp">ALIBI SKIN INTELLIGENCE</div>
@@ -634,7 +650,7 @@ const weeklyByDay = {
 // ── STEP STATE ────────────────────────────────────────────
 const amSteps = new Set();
 const pmSteps = new Set();
-const AM_TOTAL = 7;
+const AM_TOTAL = 8;
 
 function getPMTotal() {
   // Count only VISIBLE pm-step cards
@@ -681,7 +697,7 @@ function renderEveningDynamic() {
   if (isNeedleNight) {
     hide('lbl-serums'); hide('pm-3'); hide('pm-4');
   } else {
-    show('lbl-serums'); show('pm-3'); show('pm-4');
+    show('lbl-serums'); show('pm-txa'); show('pm-3'); show('pm-4');
   }
 
   // LED step
@@ -707,6 +723,7 @@ function renderEveningDynamic() {
 
   // Moisturiser on needle night = Ceramidin only
   if (isNeedleNight) {
+    hide('pm-txa');
     document.getElementById('pm-moist-product').textContent = 'Dr Jart+ Ceramidin Milky Lotion ONLY';
     document.getElementById('pm-moist-action').textContent = 'Microneedle night — Ceramidin only. No Magic Cream tonight as richer creams can interfere with the dissolving actives. Generous application to seal the channels.';
   } else {
